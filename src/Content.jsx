@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import Reviews from './projects/Reviews/Reviews'
 import Notes from './projects/Notes/Notes'
+import Quiz from './projects/Quiz/Quiz'
 
 function Content() {
     return (
@@ -13,6 +14,7 @@ function Content() {
                 <Route path="/thermos" element={<Thermos />} />
                 <Route path="/reviews" element={<Reviews />} />
                 <Route path="/notes" element={<Notes />} />
+                <Route path="/quiz" element={<Quiz />} />
             </Routes>
         </div>
     )

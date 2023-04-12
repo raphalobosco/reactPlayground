@@ -19,6 +19,9 @@ export default function Sidebar() {
                 <li>
                     <Link to='/notes'>Notes</Link>
                 </li>
+                <li>
+                    <Link to='/quiz'>Quiz</Link>
+                </li>
             </Nav>
 
         </div>

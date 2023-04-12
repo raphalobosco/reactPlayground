@@ -4,7 +4,7 @@ import Note from "./Note"
 const NotesGrid = ({ notes, handleAddNote, handleDelete }) => {
     return (
         <div className="noteList">
-            {notes.map((note) => <Note id={note.id} text={note.text} date={note.date} handleDelete={handleDelete} />)}
+            {notes.map((note) => <Note key={note.id} id={note.id} text={note.text} date={note.date} handleDelete={handleDelete} />)}
             <AddNote handleAddNote={handleAddNote} />
         </div>
     )
