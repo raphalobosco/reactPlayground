@@ -1,0 +1,71 @@
+.accordionBox {
+  box-sizing: border-box;
+  background-color: #74EBD5;
+background-image: linear-gradient(41deg, #74EBD5 0%, #9FACE6 100%);
+  width: 100%;
+  height: 100%;
+  padding-top: 3rem;
+
+  h2{
+    text-align: center;
+    font-size: 2rem;
+    color: #000000;
+    margin-bottom: 1rem;
+  }
+
+
+  .buttonBox {
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    margin-bottom: 1px;
+    
+    .accordionButton {
+      text-align: start;
+      font-size: 1rem;
+      background: none;
+      border: none;
+      width: 100%;
+      height: 100%;
+      padding: 1rem;
+    background-color: #fff;
+    transition: all 0.3s ;
+    cursor: pointer;
+    &:hover {
+      border-left:6px solid #7383cc;
+    }
+
+    }
+
+    .opened{
+      border-left:6px solid #7383cc;
+    
+    }
+  }
+  .accordionContent {
+    background-color: #dbecec;
+    width: 100%;
+    font-size: .875rem;
+    line-height: 1.5;
+    // animate open and close
+    .close {
+      padding-inline: 1rem;
+      padding-block: 0;
+      height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: all 0.5s ease;
+    }
+    .open {
+      padding-block: 1.5rem;
+      padding-inline: 1rem;
+      opacity: 1;
+      height: fit-content;
+      overflow: hidden;
+      transition: all 0.5s ease;
+    }
+  }
+}

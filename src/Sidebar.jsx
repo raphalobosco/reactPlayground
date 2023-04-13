@@ -22,6 +22,11 @@ export default function Sidebar() {
                 <li>
                     <Link to='/quiz'>Quiz</Link>
                 </li>
+                <li>
+                    <Link to='/accordion'>
+                        Accordion
+                    </Link>
+                </li>
             </Nav>
 
         </div>

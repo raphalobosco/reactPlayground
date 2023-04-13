@@ -29,10 +29,11 @@ const Quiz = () => {
     }
 
     return (
-        <div>
+        <div className='quiz'>
             {finished === false ?
                 <div className="quizBox">
                     <h3>Question {currentQuest + 1} </h3>
+                    <hr />
                     <p className='questionText'>{questions[currentQuest].question}</p>
 
                     <div className="choices">{questions[currentQuest].answers.map((choice) => {
@@ -41,7 +42,7 @@ const Quiz = () => {
 
 
                 </div>
-                : <div>
+                : <div className='quizBox results'>
                     <p>You got {score} of {questions.length}</p>
                     <button onClick={handleRestart}>Retake</button>
                 </div>}

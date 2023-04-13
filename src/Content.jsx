@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import Reviews from './projects/Reviews/Reviews'
 import Notes from './projects/Notes/Notes'
 import Quiz from './projects/Quiz/Quiz'
+import Accordion from './projects/Accordion/Accordion'
 
 function Content() {
     return (
@@ -15,6 +16,8 @@ function Content() {
                 <Route path="/reviews" element={<Reviews />} />
                 <Route path="/notes" element={<Notes />} />
                 <Route path="/quiz" element={<Quiz />} />
+                <Route path="*" element={<h1>404</h1>} />
+                <Route path='/accordion' element={<Accordion/>} />
             </Routes>
         </div>
     )
