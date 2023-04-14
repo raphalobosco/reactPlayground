@@ -27,6 +27,11 @@ export default function Sidebar() {
                         Accordion
                     </Link>
                 </li>
+                <li>
+                    <Link to='/budget'>
+                        Budget
+                    </Link>
+                </li>
             </Nav>
 
         </div>

@@ -39,13 +39,14 @@ hr {
     height: 200px;
     width: 200px;
     position: relative;
-
     border: 1rem solid white;
     overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
     box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15);
+
+
 
 
     p {
@@ -55,23 +56,38 @@ hr {
         z-index: 10;
     }
 
+
+
     .hot {
         position: absolute;
-        background: linear-gradient(45deg, #fdb939 0%, #ff7340 100%);
         z-index: 9;
-        transition: 0.5s ease-in-out;
-        height: 100%;
         width: 100%;
+        height: 100%;
+
+        background: linear-gradient(45deg, #fdb939 0%, #ff7340 100%);
+
+    }
+
+    .on {
+        opacity: 1;
+        transition: all 0.5s ease-in-out;
+    }
+
+    .off {
+        opacity: 0;
+        transition: all 0.5s ease-in-out;
     }
 
     .cold {
         position: absolute;
-        background: linear-gradient(45deg, rgb(0, 157, 215) 0%, rgb(8, 223, 255) 100%);
-        z-index: 9;
-        transition: 0.5s ease-in-out;
-        height: 100%;
+        opacity: 1;
+        transition: opacity 0.5s ease-in-out;
         width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, rgb(0, 157, 215) 0%, rgb(8, 223, 255) 100%);
     }
+
+
 }
 
 
