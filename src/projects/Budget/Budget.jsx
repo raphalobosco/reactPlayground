@@ -1,74 +1,109 @@
-import './budget.scss'
-import { useEffect, useState } from 'react'
-import { v4 as uuidv4 } from 'uuid'
+import "./budget.scss";
+import { useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 const Budget = () => {
-    const [budget, setBudget] = useState(null)
-    const [expenses, setExpenses] = useState(null)
-    const [balance, setBalance] = useState(null)
+  const [budget, setBudget] = useState("");
+  const [expenses, setExpenses] = useState("");
+  const [balance, setBalance] = useState(null);
+  const [transactions, setTransactions] = useState("");
+  const [expenseList, setExpenseList] = useState([]);
+  const [incomeList, setIncomeList] = useState([]);
 
-    const [expenseList, setExpenseList] = useState([])
+  const handleAddBalance = () => {
+    const newInc = {
+      id: uuidv4(),
+      value: parseFloat(budget),
+      text: transactions,
+    };
+    const newIncs = [...incomeList, newInc];
+    setIncomeList(newIncs);
+    setBalance(parseFloat(budget + balance));
+    setBudget("");
+    setTransactions("");
+  };
 
-
-
-    const getBudget = (e) => {
-        setBudget(e.target.value)
+  const handleAddExpense = () => {
+    if (expenses != 0 || expenses != "") {
+      const newExp = {
+        id: uuidv4(),
+        value: parseFloat(expenses),
+        text: transactions,
+      };
+      const newExps = [...expenseList, newExp];
+      setExpenseList(newExps);
+      setBalance(parseFloat(balance - expenses));
+      setExpenses("");
+      setTransactions("");
     }
+  };
 
-    const getExpenses = (e) => {
-        setExpenses(e.target.value)
-    }
+  return (
+    <div className="budget">
+      <div className="incomeBox">
+        <h3>Income</h3>
+        <div className="budgetInput">
+          <input
+            type="text"
+            onChange={(e) => setTransactions(e.target.value)}
+            value={transactions}
+          />
+          <input
+            type="number"
+            placeholder="Budget"
+            onChange={(e) => setBudget(parseFloat(e.target.value))}
+            value={budget}
+          />
 
-    const handleAddBalance = () => {
-        setBalance(budget)
-        setBudget('')
-
-    }
-
-    const handleAddExpense = () => {
-        if (expenses != 0) {
-
-            setExpenses(expenses)
-            const newExp = {
-                id: uuidv4(),
-                value: expenses,
-            }
-            const newExps = [...expenseList, newExp]
-            setExpenseList(newExps)
-            setExpenses('')
-        }
-    }
-
-
-
-
-
-
-    return (
-        <div className='budget'>
-            <div className='budgetBox'>
-                <h3>Budget</h3>
-                <hr />
-                <div className='budgetInput'>
-                    <input type='text' placeholder='Budget' onChange={getBudget} value={budget} />
-                    <button onClick={handleAddBalance}>Set</button>
-                    <p> {balance} </p>
-                </div>
-            </div>
-            <div className='budgetBox'>
-                <h3>Expenses</h3>
-                <hr />
-                <div className='budgetInput'>
-                    <input type='text' placeholder='Expenses' onChange={getExpenses} value={expenses} />
-                    <button onClick={handleAddExpense}>Add</button>
-                </div>
-                <p> {expenseList.map((expense) => {
-                    return <li key={expense.id}>{expense.value}</li>
-                })} </p>
-            </div>
-
+          <button onClick={handleAddBalance}>Set</button>
         </div>
-    )
-}
+        <hr />
+        <p>
+          {" "}
+          {incomeList.map((income) => {
+            return (
+              <li key={income.id}>
+                {income.text} € {income.value}
+              </li>
+            );
+          })}{" "}
+        </p>
+      </div>
 
-export default Budget
+      <div className="expenseBox">
+        <h3>Expenses</h3>
+        <div className="budgetInput">
+          <input
+            type="text"
+            onChange={(e) => setTransactions(e.target.value)}
+          />
+          <input
+            type="number"
+            placeholder="Expenses"
+            onChange={(e) => setExpenses(parseFloat(e.target.value))}
+            value={expenses}
+          />
+
+          <button onClick={handleAddExpense}>Add</button>
+        </div>
+        <hr />
+        <p>
+          {" "}
+          {expenseList.map((expense) => {
+            return (
+              <li key={expense.id}>
+                {expense.text} € -{expense.value}
+              </li>
+            );
+          })}{" "}
+        </p>
+      </div>
+      <div className="balanceBox">
+        <p>your total balance:</p>
+        <h3>€{balance ? balance : 0} </h3>
+      </div>
+    </div>
+  );
+};
+
+export default Budget;

@@ -7,6 +7,7 @@ import Notes from './projects/Notes/Notes'
 import Quiz from './projects/Quiz/Quiz'
 import Accordion from './projects/Accordion/Accordion'
 import Budget from './projects/Budget/Budget'
+import Search from './projects/Search/Search'
 
 function Content() {
     return (
@@ -20,6 +21,7 @@ function Content() {
                 <Route path="*" element={<h1>404</h1>} />
                 <Route path='/accordion' element={<Accordion />} />
                 <Route path='/budget' element={<Budget />} />
+                <Route path='/search' element={<Search />} />
             </Routes>
         </div>
     )

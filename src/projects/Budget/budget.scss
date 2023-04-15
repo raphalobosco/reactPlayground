@@ -1,3 +1,27 @@
 .budget {
     box-sizing: border-box;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: 1rem;
+
+
+    .balanceBox {
+        background-color: aquamarine;
+        border-radius: 1rem;
+        padding: 1rem;
+    }
+
+    .incomeBox {
+        background-color: rgb(249, 249, 170);
+        border-radius: 1rem;
+        padding: 1rem;
+    }
+
+    .expenseBox {
+        background-color: rgb(130, 193, 215);
+        border-radius: 1rem;
+        padding: 1rem;
+    }
+
+
 }
