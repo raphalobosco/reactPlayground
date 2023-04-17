@@ -3,106 +3,119 @@ import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 const Budget = () => {
-  const [budget, setBudget] = useState("");
+  const [income, setIncome] = useState("");
   const [expenses, setExpenses] = useState("");
   const [balance, setBalance] = useState(null);
   const [transactions, setTransactions] = useState("");
-  const [expenseList, setExpenseList] = useState([]);
-  const [incomeList, setIncomeList] = useState([]);
 
-  const handleAddBalance = () => {
-    const newInc = {
-      id: uuidv4(),
-      value: parseFloat(budget),
-      text: transactions,
-    };
-    const newIncs = [...incomeList, newInc];
-    setIncomeList(newIncs);
-    setBalance(parseFloat(budget + balance));
-    setBudget("");
-    setTransactions("");
-  };
+  const [transactionList, setTransactionList] = useState([]);
 
-  const handleAddExpense = () => {
+  const [descIncome, setDescIncome] = useState("");
+  const [descExpense, setDescExpense] = useState("");
+
+  const handleAddTransaction = () => {
     if (expenses != 0 || expenses != "") {
       const newExp = {
         id: uuidv4(),
-        value: parseFloat(expenses),
-        text: transactions,
+        value: -Math.abs(parseFloat(expenses)),
+        text: descExpense,
+        income: false,
       };
-      const newExps = [...expenseList, newExp];
-      setExpenseList(newExps);
+      const newExps = [...transactionList, newExp];
+      setTransactionList(newExps);
       setBalance(parseFloat(balance - expenses));
       setExpenses("");
       setTransactions("");
+      setDescExpense("");
+    }
+
+    if (income != 0 || income != "") {
+      const newInc = {
+        id: uuidv4(),
+        value: parseFloat(income),
+        text: descIncome,
+        income: true,
+      };
+      const newIncs = [...transactionList, newInc];
+      setTransactionList(newIncs);
+      setBalance(parseFloat(income + balance));
+      setIncome("");
+      setTransactions("");
+      setDescIncome("");
     }
   };
 
   return (
-    <div className="budget">
-      <div className="incomeBox">
-        <h3>Income</h3>
-        <div className="budgetInput">
-          <input
-            type="text"
-            onChange={(e) => setTransactions(e.target.value)}
-            value={transactions}
-          />
-          <input
-            type="number"
-            placeholder="Budget"
-            onChange={(e) => setBudget(parseFloat(e.target.value))}
-            value={budget}
-          />
+    <>
+      <div className="budget">
+        <div>
+          <div className="balanceBox">
+            <p>your total balance:</p>
+            <h3>€{balance ? balance : 0} </h3>
+          </div>
+          <div className="box">
+            <h3>Income</h3>
+            <div className="budgetInput">
+              <input
+                type="text"
+                placeholder="Income description"
+                onChange={(e) => setDescIncome(e.target.value)}
+                value={descIncome}
+              />
+              <input
+                type="number"
+                placeholder="Amount"
+                onChange={(e) => setIncome(parseFloat(e.target.value))}
+                value={income}
+              />
 
-          <button onClick={handleAddBalance}>Set</button>
+              <button className="btn" onClick={handleAddTransaction}>
+                Add
+              </button>
+            </div>
+          </div>
+
+          <div className="box">
+            <h3>Expenses</h3>
+            <div className="budgetInput">
+              <input
+                type="text"
+                placeholder="Expense description"
+                onChange={(e) => setDescExpense(e.target.value)}
+                value={descExpense}
+              />
+              <input
+                type="number"
+                placeholder="Amount"
+                onChange={(e) => setExpenses(parseFloat(e.target.value))}
+                value={expenses}
+              />
+
+              <button
+                className="btn"
+                onClick={(e) => handleAddTransaction(e.target.value)}
+              >
+                Add
+              </button>
+            </div>
+          </div>
         </div>
-        <hr />
-        <p>
-          {" "}
-          {incomeList.map((income) => {
+        <ul className="transactions">
+          <h3>Transactions</h3>
+          {transactionList.map((transaction) => {
             return (
-              <li key={income.id}>
-                {income.text} € {income.value}
+              <li
+                key={transaction.id}
+                className={transaction.income ? "income" : "expense"}
+              >
+                <span>{transaction.text}</span>
+                <span className="amount">€{transaction.value}</span>
               </li>
             );
-          })}{" "}
-        </p>
+          })}
+        </ul>
       </div>
-
-      <div className="expenseBox">
-        <h3>Expenses</h3>
-        <div className="budgetInput">
-          <input
-            type="text"
-            onChange={(e) => setTransactions(e.target.value)}
-          />
-          <input
-            type="number"
-            placeholder="Expenses"
-            onChange={(e) => setExpenses(parseFloat(e.target.value))}
-            value={expenses}
-          />
-
-          <button onClick={handleAddExpense}>Add</button>
-        </div>
-        <hr />
-        <p>
-          {" "}
-          {expenseList.map((expense) => {
-            return (
-              <li key={expense.id}>
-                {expense.text} € -{expense.value}
-              </li>
-            );
-          })}{" "}
-        </p>
-      </div>
-      <div className="balanceBox">
-        <p>your total balance:</p>
-        <h3>€{balance ? balance : 0} </h3>
-      </div>
-    </div>
+    </>
   );
 };
 
